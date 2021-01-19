@@ -1,2 +1,2 @@
 ### MenuBar:
-![](readmeFile/MenuBar.jpg)
+![](readmeFile/MenuBar.png)
