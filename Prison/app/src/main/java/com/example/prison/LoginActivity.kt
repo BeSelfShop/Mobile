@@ -31,8 +31,8 @@ class LoginActivity : AppCompatActivity() {
 
 //
 
-            val login = findViewById<EditText>(R.id.loginText).toString()
-            val password = findViewById<EditText>(R.id.passwordText).toString()
+            val login = findViewById<EditText>(R.id.loginText).text.toString()
+            val password = findViewById<EditText>(R.id.passwordText).text.toString()
 
             RetrofitClient.instance.userLogin(login,password).enqueue(object: Callback<LoginResponse>{
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -40,7 +40,8 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<LoginResponse>,response: Response<LoginResponse>) {
-                    println(response.body())
+                    println(login + " " + password)
+                    println(response)
 //                    SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
 //                    val intent = Intent(applicationContext,HomeAcitivity::class.java)
 //                    startActivity(intent)
