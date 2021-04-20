@@ -2,7 +2,6 @@ package com.example.prison
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -28,23 +27,24 @@ class LoginActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.loginBtn)
 
         button.setOnClickListener {
-
-//
-
             val login = findViewById<EditText>(R.id.loginText).text.toString()
             val password = findViewById<EditText>(R.id.passwordText).text.toString()
 
+
+
             RetrofitClient.instance.userLogin(login,password).enqueue(object: Callback<LoginResponse>{
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    println(login + " " + password + "Success: F")
+                    println(t)
                     Toast.makeText(applicationContext,"failure",Toast.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(call: Call<LoginResponse>,response: Response<LoginResponse>) {
-                    println(login + " " + password)
-                    println(response)
-//                    SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
-//                    val intent = Intent(applicationContext,HomeAcitivity::class.java)
-//                    startActivity(intent)
+                    println(login + " " + password +  "Success: R")
+                    println(response.body())
+                    SharedPrefManager.getInstance(applicationContext).saveUser(response.body())
+                    val intent = Intent(applicationContext,HomeAcitivity::class.java)
+                    startActivity(intent)
                 }
             })
         }
