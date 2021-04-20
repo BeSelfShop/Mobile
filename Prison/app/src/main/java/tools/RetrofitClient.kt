@@ -10,7 +10,8 @@ object RetrofitClient {
     //to poprawienia, bo cos tutaj jest nie teges
     private val AUTH = "Bearer "+ Base64.encodeToString("belalkhan:123456".toByteArray(), Base64.NO_WRAP)
 
-    private const val BASE_URL = "https://wiezienie2021.azurewebsites.net/api/"
+    private const val BASE_URL = " https://wiezienie202l.azurewebsites.net/api/"
+
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->

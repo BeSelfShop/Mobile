@@ -29,10 +29,12 @@ class LoginActivity : AppCompatActivity() {
 
         button.setOnClickListener {
 
-//
 
-            val login = findViewById<EditText>(R.id.loginText).toString()
-            val password = findViewById<EditText>(R.id.passwordText).toString()
+            val login = findViewById<EditText>(R.id.loginText).text.toString()
+            val password = findViewById<EditText>(R.id.passwordText).text.toString()
+
+
+            println(login + " " + password)
 
             RetrofitClient.instance.userLogin(login,password).enqueue(object: Callback<LoginResponse>{
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -40,10 +42,16 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<LoginResponse>,response: Response<LoginResponse>) {
+
                     println(response.body())
-//                    SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
-//                    val intent = Intent(applicationContext,HomeAcitivity::class.java)
-//                    startActivity(intent)
+
+                    if(response.body() != null)
+                    {
+                        SharedPrefManager.getInstance(applicationContext).saveUser(LoginResponse(response.body()?.token,response.body()?.expiration,response.body()?.roles))
+                        val intent = Intent(applicationContext,HomeAcitivity::class.java)
+                        startActivity(intent)
+                    }
+
                 }
             })
         }
