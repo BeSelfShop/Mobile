@@ -14,11 +14,11 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
 
     val user: User
         get() {
-            val rule: List<String>
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             return User(
-                sharedPreferences.getString("token"," "),
-                sharedPreferences.getString("exp"," ")
+                sharedPreferences.getString("token","asd"),
+                sharedPreferences.getString("exp","2346"),
+                sharedPreferences.getString("rules","admin")
             )
         }
 
@@ -30,6 +30,7 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
 
         editor.putString("tokken", user.token)
         editor.putString("exp", user.expiration)
+        editor.putString("rule", user.userRoles?.get(0).toString())
 
         editor.apply()
 

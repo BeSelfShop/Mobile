@@ -9,7 +9,7 @@ import models.LoginResponse
 interface Api {
 
     @FormUrlEncoded
-    @POST("Authentication/login")
+    @POST("userlogin")
     fun userLogin(
         @Field("username") username:String,
         @Field("password") password:String
