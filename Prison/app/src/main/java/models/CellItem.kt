@@ -1,3 +1,3 @@
 package models
 
-data class CellItem(var number:String?,var name:String?)
+data class CellItem(val number:String?,val name:String?)
