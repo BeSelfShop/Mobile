@@ -3,8 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.prison.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/home"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/Home"
+        android:icon="@drawable/ic_home"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/logs"
+        android:orderInCategory="100"
+        android:title="@string/Logs"
+        android:icon="@drawable/ic_logs"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/profile"
+        android:orderInCategory="100"
+        android:title="@string/Profile"
+        android:icon="@drawable/ic_profile"
+        app:showAsAction="never" />
+
+
 </menu>

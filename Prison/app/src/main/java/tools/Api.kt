@@ -1,10 +1,9 @@
 package tools
 
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
 import models.LoginResponse
+import models.LogsResponse
+import retrofit2.http.*
 
 interface Api {
 
@@ -14,5 +13,8 @@ interface Api {
         @Field("UserName") username:String,
         @Field("Password") password:String
     ): Call<LoginResponse>
+
+    @GET("Logger")
+    fun getLogs(@Header("Authorization") authorization: String?):Call<List<LogsResponse>>
 
 }

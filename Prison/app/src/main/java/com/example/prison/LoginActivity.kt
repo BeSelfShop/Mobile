@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if(response.body() != null)
                     {
-                        SharedPrefManager.getInstance(applicationContext).saveUser(LoginResponse(response.body()?.token,response.body()?.expiration,response.body()?.roles))
+                        SharedPrefManager.getInstance(applicationContext).saveUser(LoginResponse("Bearer " + response.body()?.token,response.body()?.expiration,response.body()?.roles))
                         val intent = Intent(applicationContext,HomeAcitivity::class.java)
                         startActivity(intent)
                     }
