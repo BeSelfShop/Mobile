@@ -12,14 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Prison"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".LogsActivity" />
-        <activity android:name=".LoginMake" />
-        <activity android:name=".HomeAcitivity" />
+        <activity
+            android:name=".ProfileAcitivity"
+            android:theme="@style/Theme.Prison"
+            android:label="Profile"/>
+        <activity
+            android:name=".LogsActivity"
+            android:theme="@style/Theme.Prison"
+            android:label="Logs"/>
+        <activity
+            android:name=".HomeAcitivity"
+            android:label="Home"
+            android:theme="@style/Theme.Prison"/>
         <activity
             android:name=".LoginActivity"
-            android:label="Prison"
-            android:theme="@style/Theme.Prison.NoActionBar">
+            android:label="Login"
+            android:theme="@style/Theme.Prison">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

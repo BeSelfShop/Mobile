@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogsActivity">
+    tools:context=".ProfileAcitivity">
 
-    <TextView
+    <Button
+        android:id="@+id/button_logOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Logs"
-        android:textSize="60dp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        />
-
-
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="166dp"
+        android:layout_marginRight="166dp"
+        android:layout_marginBottom="565dp"
+        android:text="Log out" />
 </RelativeLayout>

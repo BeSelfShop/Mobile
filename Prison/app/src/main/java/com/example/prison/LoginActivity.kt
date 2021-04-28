@@ -12,6 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import storage.SharedPrefManager
+import tools.Api
 import tools.RetrofitClient
 
 
@@ -27,6 +28,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         val button = findViewById<Button>(R.id.loginBtn)
 
+        val pref = getApplicationContext().getSharedPreferences("my_shared_preff", 0)
+        println("1.LoginAcitivity")
+        pref.edit().clear()
+        println(pref.getString("token",""))
+
         button.setOnClickListener {
 
 
@@ -36,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
             println(login + " " + password)
 
-            RetrofitClient.instance.userLogin(login,password).enqueue(object: Callback<LoginResponse>{
+            RetrofitClient.buildApi(Api::class.java,"").userLogin(login,password).enqueue(object: Callback<LoginResponse>{
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Toast.makeText(applicationContext,"failure",Toast.LENGTH_LONG).show()
                 }
@@ -47,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if(response.body() != null)
                     {
-                        SharedPrefManager.getInstance(applicationContext).saveUser(LoginResponse("Bearer " + response.body()?.token,response.body()?.expiration,response.body()?.roles))
+                        SharedPrefManager.getInstance(applicationContext).saveUser(LoginResponse(response.body()?.token,response.body()?.expiration,response.body()?.roles))
                         val intent = Intent(applicationContext,HomeAcitivity::class.java)
                         startActivity(intent)
                     }

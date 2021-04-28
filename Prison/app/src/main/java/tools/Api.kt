@@ -14,6 +14,7 @@ interface Api {
         @Field("Password") password:String
     ): Call<LoginResponse>
 
+
     @GET("Logger")
     fun getLogs(@Header("Authorization") authorization: String?):Call<List<LogsResponse>>
 
