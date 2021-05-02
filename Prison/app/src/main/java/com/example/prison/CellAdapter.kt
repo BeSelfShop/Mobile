@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import models.CellItem
+import models.LogsResponse
 
 class CellAdapter(private val cellList: List<CellItem>) : RecyclerView.Adapter<CellAdapter.CellViewHolder>() {
 

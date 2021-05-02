@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,7 @@ class HomeAcitivity : AppCompatActivity() {
 
         val cellItem = generateDummyList(100)
 
-        val recycler = findViewById<RecyclerView>(R.id.recycler_view)
+        val recycler = findViewById<RecyclerView>(R.id.recycler_view_home)
 
         recycler.adapter = CellAdapter(cellItem)
         recycler.layoutManager = LinearLayoutManager(this)

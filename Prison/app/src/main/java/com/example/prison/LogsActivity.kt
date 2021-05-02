@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
+import models.CellItem
 import models.LogsResponse
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -14,7 +17,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tools.Api
-import tools.RetrofitClient
 
 
 class LogsActivity : AppCompatActivity() {
@@ -43,11 +45,20 @@ class LogsActivity : AppCompatActivity() {
             .build()
             .create(Api::class.java)
 
+
+
         retrofit.getLogs("Bearer " + token).enqueue(object :
             Callback<List<LogsResponse>> {
             override fun onResponse(call: Call<List<LogsResponse>>, response: Response<List<LogsResponse>>) {
-
                 print(response.body())
+
+                val recycler = findViewById<RecyclerView>(R.id.recycler_view_logs)
+                val list = ArrayList<LogsResponse>()
+                println(list)
+
+                recycler.adapter = response.body()?.let { LogsAdapter(it) }
+                recycler.layoutManager = LinearLayoutManager(applicationContext)
+                recycler.setHasFixedSize(true)
             }
 
             override fun onFailure(call: Call<List<LogsResponse>>, t: Throwable) {
