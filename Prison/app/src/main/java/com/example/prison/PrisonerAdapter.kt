@@ -18,7 +18,7 @@ class PrisonerAdapter(private val prisonerList: List<PrisonerResponse>, private 
     override fun onBindViewHolder(holder: CellViewHolder, position: Int) {
         val currentItem = prisonerList?.get(position)
 
-        holder.number.text = "Więzień " + currentItem?.id.toString()
+        holder.number.text = currentItem?.id.toString()
         holder.name.text = currentItem?.name
         holder.forname.text = currentItem?.forname
     }
@@ -36,9 +36,10 @@ class PrisonerAdapter(private val prisonerList: List<PrisonerResponse>, private 
 
         override fun onClick(v: View?) {
             val position = adapterPosition
+
             if(position != RecyclerView.NO_POSITION)
             {
-                listener?.onItemClick(position)
+                listener?.onItemClick(adapterPosition)
             }
         }
     }

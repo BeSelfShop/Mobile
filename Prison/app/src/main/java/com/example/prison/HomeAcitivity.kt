@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
@@ -18,6 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tools.Api
+import java.text.FieldPosition
 
 
 class HomeAcitivity : AppCompatActivity(),PrisonerAdapter.OnItemClickListener {
@@ -89,6 +92,9 @@ class HomeAcitivity : AppCompatActivity(),PrisonerAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this, "item $position clicked", Toast.LENGTH_SHORT).show()
+        val item = findViewById<RecyclerView>(R.id.recycler_view_home).get(position)
+        val id_item = item.findViewById<TextView>(R.id.prisoner_number).text.toString().toInt()
+        startActivity(Intent(this, PrisonerActivity::class.java).putExtra("ID",id_item))
+        overridePendingTransition(0,0)
     }
 }

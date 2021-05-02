@@ -12,18 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Prison"
         android:usesCleartextTraffic="true">
+        <activity android:name=".PrisonerActivity"></activity>
         <activity
             android:name=".ProfileAcitivity"
-            android:theme="@style/Theme.Prison"
-            android:label="Profile"/>
+            android:label="Profile"
+            android:theme="@style/Theme.Prison" />
         <activity
             android:name=".LogsActivity"
-            android:theme="@style/Theme.Prison"
-            android:label="Logs"/>
+            android:label="Logs"
+            android:theme="@style/Theme.Prison" />
         <activity
             android:name=".HomeAcitivity"
             android:label="Home"
-            android:theme="@style/Theme.Prison"/>
+            android:theme="@style/Theme.Prison" />
         <activity
             android:name=".LoginActivity"
             android:label="Login"
