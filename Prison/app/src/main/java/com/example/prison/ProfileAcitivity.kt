@@ -45,10 +45,6 @@ class ProfileAcitivity : AppCompatActivity() {
                 startActivity(Intent(this, LogsActivity::class.java))
                 overridePendingTransition(0,0)
             }
-            R.id.profile -> {
-                startActivity(Intent(this, ProfileAcitivity::class.java))
-                overridePendingTransition(0,0)
-            }
         }
 
         return super.onOptionsItemSelected(item)

@@ -38,10 +38,6 @@ class HomeAcitivity : AppCompatActivity() {
 
         when(item.itemId)
         {
-            R.id.home -> {
-                startActivity(Intent(this, HomeAcitivity::class.java))
-                overridePendingTransition(0,0)
-            }
             R.id.logs -> {
                 startActivity(Intent(this, LogsActivity::class.java))
                 overridePendingTransition(0,0)
