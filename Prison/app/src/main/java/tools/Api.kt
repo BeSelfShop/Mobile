@@ -4,6 +4,7 @@ import retrofit2.Call
 import models.LoginResponse
 import models.LogsResponse
 import models.PrisonerResponse
+import models.PrisonersResponse
 import retrofit2.http.*
 
 interface Api {
@@ -20,6 +21,10 @@ interface Api {
     fun getLogs(@Header("Authorization") authorization: String?):Call<List<LogsResponse>>
 
     @GET("Prisoner")
-    fun getPrisoners(@Header("Authorization") authorization: String?):Call<List<PrisonerResponse>>
+    fun getPrisoners(@Header("Authorization") authorization: String?):Call<List<PrisonersResponse>>
+
+    @GET("Prisoner/{id}")
+    fun getPrisoner(@Header("Authorization") authorization: String?, @Path("id") id: Int): Call<PrisonerResponse>
+
 
 }

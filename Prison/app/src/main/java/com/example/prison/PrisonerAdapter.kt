@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import models.PrisonerResponse
+import models.PrisonersResponse
 
-class PrisonerAdapter(private val prisonerList: List<PrisonerResponse>, private val listener: OnItemClickListener?=null) : RecyclerView.Adapter<PrisonerAdapter.CellViewHolder>() {
+class PrisonerAdapter(private val prisonersList: List<PrisonersResponse>, private val listener: OnItemClickListener?=null) : RecyclerView.Adapter<PrisonerAdapter.CellViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CellViewHolder {
 
@@ -16,14 +16,14 @@ class PrisonerAdapter(private val prisonerList: List<PrisonerResponse>, private 
     }
 
     override fun onBindViewHolder(holder: CellViewHolder, position: Int) {
-        val currentItem = prisonerList?.get(position)
+        val currentItem = prisonersList?.get(position)
 
         holder.number.text = currentItem?.id.toString()
         holder.name.text = currentItem?.name
         holder.forname.text = currentItem?.forname
     }
 
-    override fun getItemCount(): Int = prisonerList?.size!!
+    override fun getItemCount(): Int = prisonersList?.size!!
 
     inner class CellViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
         val number: TextView = itemView.findViewById(R.id.prisoner_number)
