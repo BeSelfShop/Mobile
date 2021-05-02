@@ -34,10 +34,8 @@ class LogsActivity : AppCompatActivity() {
         val token = pref.getString("tokken", "")
 
         val client = OkHttpClient()
-
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-
         val retrofit: Api = Retrofit.Builder()
             .baseUrl("https://wiezienie202l.azurewebsites.net/api/")
             .client(client)
@@ -50,11 +48,7 @@ class LogsActivity : AppCompatActivity() {
         retrofit.getLogs("Bearer " + token).enqueue(object :
             Callback<List<LogsResponse>> {
             override fun onResponse(call: Call<List<LogsResponse>>, response: Response<List<LogsResponse>>) {
-                print(response.body())
-
                 val recycler = findViewById<RecyclerView>(R.id.recycler_view_logs)
-                val list = ArrayList<LogsResponse>()
-                println(list)
 
                 recycler.adapter = response.body()?.let { LogsAdapter(it) }
                 recycler.layoutManager = LinearLayoutManager(applicationContext)

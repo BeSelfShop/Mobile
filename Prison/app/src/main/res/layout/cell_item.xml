@@ -11,7 +11,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/cell_image_view"
+            android:id="@+id/prisoner_image_view"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="8dp"
@@ -19,24 +19,36 @@
             android:src="@drawable/ic_baseline_cell" />
 
         <TextView
-            android:id="@+id/cell_number"
+            android:id="@+id/prisoner_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/cell_image_view"
-            android:layout_toRightOf="@+id/cell_image_view"
-            android:text="Line 1"
+            android:layout_toEndOf="@+id/prisoner_image_view"
+            android:layout_toRightOf="@+id/prisoner_image_view"
+            android:text="Id"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/cell_name"
+            android:id="@+id/prisoner_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cell_number"
-            android:layout_toEndOf="@+id/cell_image_view"
-            android:layout_toRightOf="@+id/cell_image_view"
-            android:text="Line 2" />
+            android:layout_below="@+id/prisoner_number"
+            android:layout_toEndOf="@+id/prisoner_image_view"
+            android:layout_toRightOf="@+id/prisoner_image_view"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/prisoner_forname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prisoner_number"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="23dp"
+            android:layout_toEndOf="@+id/prisoner_image_view"
+            android:layout_toRightOf="@+id/prisoner_image_view"
+            android:text="forname" />
 
     </RelativeLayout>
 
