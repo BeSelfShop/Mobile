@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
             println(login + " " + password)
 
-            RetrofitClient.buildApi(Api::class.java,"").userLogin(login,password).enqueue(object: Callback<LoginResponse>{
+            RetrofitClient.buildApi(Api::class.java).userLogin(login,password).enqueue(object: Callback<LoginResponse>{
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Toast.makeText(applicationContext,"failure",Toast.LENGTH_LONG).show()
                 }

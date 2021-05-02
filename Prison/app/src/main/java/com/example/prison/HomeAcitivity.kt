@@ -4,13 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
 import models.CellItem
-import models.LogsResponse
 import models.PrisonerResponse
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -21,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import tools.Api
 
 
-class HomeAcitivity : AppCompatActivity() {
+class HomeAcitivity : AppCompatActivity(),PrisonerAdapter.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_acitivity)
@@ -42,14 +41,12 @@ class HomeAcitivity : AppCompatActivity() {
             .create(Api::class.java)
 
 
+
+
         retrofit.getPrisoners("Bearer " + token).enqueue(object :
             Callback<List<PrisonerResponse>> {
             override fun onResponse(call: Call<List<PrisonerResponse>>, response: Response<List<PrisonerResponse>>) {
-                val recycler = findViewById<RecyclerView>(R.id.recycler_view_home)
-
-                recycler.adapter = response.body()?.let { PrisonerAdapter(it) }
-                recycler.layoutManager = LinearLayoutManager(applicationContext)
-                recycler.setHasFixedSize(true)
+                response.body()?.let { initRecyclerView(it) }
             }
 
             override fun onFailure(call: Call<List<PrisonerResponse>>, t: Throwable) {
@@ -83,23 +80,15 @@ class HomeAcitivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun generateDummyList(size: Int) : List<CellItem>
+    private fun initRecyclerView(list: List<PrisonerResponse>)
     {
-        val list = ArrayList<CellItem>()
+        val recycler = findViewById<RecyclerView>(R.id.recycler_view_home)
+        recycler.adapter =  PrisonerAdapter(list,this)
+        recycler.layoutManager = LinearLayoutManager(applicationContext)
+        recycler.setHasFixedSize(true)
+    }
 
-        for (i in 0 until size)
-        {
-            if (i%2 == 0)
-            {
-                list.add(CellItem("number " + (i + 1), "John"))
-            }
-            else
-            {
-                list.add(CellItem("number " + (i + 1), "George"))
-            }
-
-        }
-
-        return list
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this, "item $position clicked", Toast.LENGTH_SHORT).show()
     }
 }

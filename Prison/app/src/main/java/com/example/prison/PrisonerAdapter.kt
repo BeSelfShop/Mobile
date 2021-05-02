@@ -5,12 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import models.CellItem
 import models.PrisonerResponse
 
-class PrisonerAdapter(private val prisonerList: List<PrisonerResponse>) : RecyclerView.Adapter<PrisonerAdapter.CellViewHolder>() {
-
-
+class PrisonerAdapter(private val prisonerList: List<PrisonerResponse>, private val listener: OnItemClickListener?=null) : RecyclerView.Adapter<PrisonerAdapter.CellViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CellViewHolder {
 
@@ -19,19 +16,35 @@ class PrisonerAdapter(private val prisonerList: List<PrisonerResponse>) : Recycl
     }
 
     override fun onBindViewHolder(holder: CellViewHolder, position: Int) {
-        val currentItem = prisonerList[position]
+        val currentItem = prisonerList?.get(position)
 
-        holder.number.text = "Więzień " + currentItem.id.toString()
-        holder.name.text = currentItem.name
-        holder.forname.text = currentItem.forname
+        holder.number.text = "Więzień " + currentItem?.id.toString()
+        holder.name.text = currentItem?.name
+        holder.forname.text = currentItem?.forname
     }
 
-    override fun getItemCount() = prisonerList.size
+    override fun getItemCount(): Int = prisonerList?.size!!
 
-    class CellViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class CellViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
         val number: TextView = itemView.findViewById(R.id.prisoner_number)
         val name: TextView = itemView.findViewById(R.id.prisoner_name)
         val forname: TextView = itemView.findViewById(R.id.prisoner_forname)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION)
+            {
+                listener?.onItemClick(position)
+            }
+        }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
     }
 
 }

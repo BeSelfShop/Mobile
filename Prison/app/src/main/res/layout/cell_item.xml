@@ -45,9 +45,9 @@
             android:layout_below="@+id/prisoner_number"
             android:layout_marginStart="7dp"
             android:layout_marginLeft="7dp"
-            android:layout_marginTop="23dp"
-            android:layout_toEndOf="@+id/prisoner_image_view"
-            android:layout_toRightOf="@+id/prisoner_image_view"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/prisoner_name"
+            android:layout_toRightOf="@+id/prisoner_name"
             android:text="forname" />
 
     </RelativeLayout>

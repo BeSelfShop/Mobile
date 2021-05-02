@@ -28,8 +28,7 @@ object RetrofitClient {
 
 
     fun <Api> buildApi(
-        api: Class<Api>,
-        authToken: String? = null
+        api: Class<Api>
     ): Api {
 
         return Retrofit.Builder()
