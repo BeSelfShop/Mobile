@@ -13,12 +13,14 @@
         android:theme="@style/Theme.Prison"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.AddCellActivity"
+            android:label="Add Cells"
+            android:theme="@style/Theme.Prison">
+        </activity>
+        <activity
             android:name=".Activity.AddPrisonerrActivity"
             android:label="Add Prisoner"
-            android:theme="@style/Theme.Prison" >
-
-
-        </activity>
+            android:theme="@style/Theme.Prison"></activity>
         <activity
             android:name=".Activity.CellDetailsActivity"
             android:label="Cells"

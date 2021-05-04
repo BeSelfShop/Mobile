@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.get
@@ -40,6 +41,8 @@ class CellsActivity : AppCompatActivity(), CellsAdapter.OnItemClickListener {
             .build()
             .create(Api::class.java)
 
+        val dodajCele = findViewById<Button>(R.id.dodajCele)
+
 
         retrofit.getCells("Bearer " + token).enqueue(object :
             Callback<List<Cell>> {
@@ -53,6 +56,11 @@ class CellsActivity : AppCompatActivity(), CellsAdapter.OnItemClickListener {
             }
 
         })
+
+        dodajCele.setOnClickListener {
+            startActivity(Intent(this, AddCellActivity::class.java))
+            overridePendingTransition(0,0)
+        }
 
     }
 
