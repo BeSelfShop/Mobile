@@ -1,14 +1,16 @@
-package com.example.prison
+package com.example.prison.Activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prison.Adapter.LogsAdapter
+import com.example.prison.R
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
-import models.CellItem
 import models.LogsResponse
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -56,7 +58,7 @@ class LogsActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<LogsResponse>>, t: Throwable) {
-                println("onFailure")
+                Toast.makeText(this@LogsActivity, "nie Dziala LogsActivity", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -74,11 +76,15 @@ class LogsActivity : AppCompatActivity() {
         {
             R.id.home -> {
                 startActivity(Intent(this, HomeAcitivity::class.java))
-                overridePendingTransition(0, 0)
+                overridePendingTransition(0,0)
             }
             R.id.profile -> {
                 startActivity(Intent(this, ProfileAcitivity::class.java))
-                overridePendingTransition(0, 0)
+                overridePendingTransition(0,0)
+            }
+            R.id.cell -> {
+                startActivity(Intent(this, CellsActivity::class.java))
+                overridePendingTransition(0,0)
             }
         }
 

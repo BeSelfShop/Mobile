@@ -1,4 +1,4 @@
-package com.example.prison
+package com.example.prison.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,9 +6,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.get
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.prison.Adapter.CellsAdapter
+import com.example.prison.R
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
-import models.PrisonerResponse
-import models.PrisonersResponse
+import models.Cell
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,16 +22,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tools.Api
 
-class PrisonerActivity : AppCompatActivity() {
+class CellsActivity : AppCompatActivity(), CellsAdapter.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_prisoner)
+        setContentView(R.layout.activity_cells)
 
-
-        val prisoner_id = getIntent().getStringExtra("prisoner_id").toString().toInt()
         val pref = getApplicationContext().getSharedPreferences("my_shared_preff", 0);
         val token = pref.getString("tokken", "")
-
 
         val client = OkHttpClient()
         val interceptor = HttpLoggingInterceptor()
@@ -39,29 +41,21 @@ class PrisonerActivity : AppCompatActivity() {
             .create(Api::class.java)
 
 
-        retrofit.getPrisoner("Bearer " + token,prisoner_id).enqueue(object : Callback<PrisonerResponse> {
-            override fun onResponse(call: Call<PrisonerResponse>, response: Response<PrisonerResponse>) {
+        retrofit.getCells("Bearer " + token).enqueue(object :
+            Callback<List<Cell>> {
+            override fun onResponse(call: Call<List<Cell>>, response: Response<List<Cell>>) {
                 println(response.body())
-
-                val name = findViewById<TextView>(R.id.name)
-                val username = findViewById<TextView>(R.id.username)
-                val address = findViewById<TextView>(R.id.address)
-                val pesel = findViewById<TextView>(R.id.pesel)
-                val idcell = findViewById<TextView>(R.id.idcell)
-
-                name.text = response.body()?.name
-                username.text = response.body()?.forname
-                address.text = response.body()?.address
-                pesel.text = response.body()?.pesel
-                idcell.text = response.body()?.idCell.toString()
+                response.body()?.let { initRecyclerView(it) }
             }
 
-            override fun onFailure(call: Call<PrisonerResponse>, t: Throwable) {
-                println("onFailure")
+            override fun onFailure(call: Call<List<Cell>>, t: Throwable) {
+                Toast.makeText(this@CellsActivity, "nie Dziala CellActivity", Toast.LENGTH_SHORT).show()
             }
 
         })
+
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         menuInflater.inflate(R.menu.menu_main,menu)
@@ -72,6 +66,10 @@ class PrisonerActivity : AppCompatActivity() {
 
         when(item.itemId)
         {
+            R.id.home -> {
+                startActivity(Intent(this, HomeAcitivity::class.java))
+                overridePendingTransition(0,0)
+            }
             R.id.logs -> {
                 startActivity(Intent(this, LogsActivity::class.java))
                 overridePendingTransition(0,0)
@@ -83,5 +81,22 @@ class PrisonerActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initRecyclerView(list: List<Cell>)
+    {
+        val recycler = findViewById<RecyclerView>(R.id.recycler_view_cell)
+        recycler.adapter =  CellsAdapter(list,this)
+        recycler.layoutManager = LinearLayoutManager(applicationContext)
+        recycler.setHasFixedSize(true)
+    }
+
+    override fun onItemClick(position: Int) {
+
+        val item = findViewById<RecyclerView>(R.id.recycler_view_cell).get(position)
+        val id = item.findViewById<TextView>(R.id.cellId).text.toString()
+
+        startActivity(Intent(this, CellDetailsActivity::class.java).putExtra("cell_id",id))
+        overridePendingTransition(0,0)
     }
 }

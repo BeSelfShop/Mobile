@@ -12,21 +12,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Prison"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PrisonerActivity"></activity>
         <activity
-            android:name=".ProfileAcitivity"
+            android:name=".Activity.AddPrisonerrActivity"
+            android:label="Add Prisoner"
+            android:theme="@style/Theme.Prison" >
+
+
+        </activity>
+        <activity
+            android:name=".Activity.CellDetailsActivity"
+            android:label="Cells"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.CellsActivity"
+            android:label="Cells"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.RegisterAcitivity"
+            android:label="Register"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.PrisonerActivity"
+            android:label="Prisoner"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.ProfileAcitivity"
             android:label="Profile"
             android:theme="@style/Theme.Prison" />
         <activity
-            android:name=".LogsActivity"
+            android:name=".Activity.LogsActivity"
             android:label="Logs"
             android:theme="@style/Theme.Prison" />
         <activity
-            android:name=".HomeAcitivity"
+            android:name=".Activity.HomeAcitivity"
             android:label="Home"
             android:theme="@style/Theme.Prison" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:label="Login"
             android:theme="@style/Theme.Prison">
             <intent-filter>

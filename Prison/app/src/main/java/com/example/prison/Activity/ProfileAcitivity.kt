@@ -1,4 +1,4 @@
-package com.example.prison
+package com.example.prison.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import com.example.prison.R
 
 class ProfileAcitivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +44,10 @@ class ProfileAcitivity : AppCompatActivity() {
             }
             R.id.logs -> {
                 startActivity(Intent(this, LogsActivity::class.java))
+                overridePendingTransition(0,0)
+            }
+            R.id.cell -> {
+                startActivity(Intent(this, CellsActivity::class.java))
                 overridePendingTransition(0,0)
             }
         }

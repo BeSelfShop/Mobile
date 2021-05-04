@@ -1,13 +1,14 @@
-package com.example.prison
+package com.example.prison.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import models.PrisonersResponse
+import com.example.prison.R
+import models.Cell
 
-class PrisonerAdapter(private val prisonersList: List<PrisonersResponse>, private val listener: OnItemClickListener?=null) : RecyclerView.Adapter<PrisonerAdapter.CellViewHolder>() {
+class CellsAdapter(private val cellList: List<Cell>, private val listener: OnItemClickListener?=null) : RecyclerView.Adapter<CellsAdapter.CellViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CellViewHolder {
 
@@ -16,19 +17,17 @@ class PrisonerAdapter(private val prisonersList: List<PrisonersResponse>, privat
     }
 
     override fun onBindViewHolder(holder: CellViewHolder, position: Int) {
-        val currentItem = prisonersList?.get(position)
+        val currentItem = cellList?.get(position)
 
-        holder.number.text = currentItem?.id.toString()
-        holder.name.text = currentItem?.name
-        holder.forname.text = currentItem?.forname
+        holder.id.text = currentItem?.id.toString()
+        holder.name.text = currentItem?.cellType.cellName
     }
 
-    override fun getItemCount(): Int = prisonersList?.size!!
+    override fun getItemCount(): Int = cellList?.size!!
 
     inner class CellViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        val number: TextView = itemView.findViewById(R.id.prisoner_number)
-        val name: TextView = itemView.findViewById(R.id.prisoner_name)
-        val forname: TextView = itemView.findViewById(R.id.prisoner_forname)
+        val id: TextView = itemView.findViewById(R.id.cellId)
+        val name: TextView = itemView.findViewById(R.id.cellName)
 
         init {
             itemView.setOnClickListener(this)

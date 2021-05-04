@@ -1,10 +1,11 @@
-package com.example.prison
+package com.example.prison.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prison.R
 import models.LogsResponse
 
 class LogsAdapter(private val logsList: List<LogsResponse>) : RecyclerView.Adapter<LogsAdapter.LogsViewHolder>() {

@@ -1,7 +1,7 @@
 package storage
 
 import android.content.Context
-import models.LoginResponse
+import models.LoginReq
 
 
 class SharedPrefManager private constructor(private val mCtx: Context) {
@@ -12,10 +12,10 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
             return sharedPreferences.getString("token", "")
         }
 
-    val user: LoginResponse
+    val user: LoginReq
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-            return LoginResponse(
+            return LoginReq(
                 sharedPreferences.getString("token",""),
                 sharedPreferences.getString("exp",""),
                 sharedPreferences.getString("roles","")
@@ -23,7 +23,7 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
         }
 
 
-    fun saveUser(user: LoginResponse) {
+    fun saveUser(user: LoginReq) {
 
         val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
