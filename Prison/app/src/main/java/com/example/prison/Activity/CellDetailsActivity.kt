@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.example.prison.R
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
 import models.CellDetails
+import models.DeleteCellResponse
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,6 +29,8 @@ class CellDetailsActivity : AppCompatActivity() {
         val pref = getApplicationContext().getSharedPreferences("my_shared_preff", 0);
         val token = pref.getString("tokken", "")
 
+        println(cell_id)
+
         val edytujCele = findViewById<Button>(R.id.edytujCele)
         val usunCele = findViewById<Button>(R.id.usunCele)
 
@@ -41,13 +44,13 @@ class CellDetailsActivity : AppCompatActivity() {
             .build()
             .create(Api::class.java)
 
+        val id = findViewById<TextView>(R.id.idCellDetails)
+
         retrofit.getCellDetails("Bearer " + token,cell_id).enqueue(object : Callback<CellDetails> {
             override fun onResponse(call: Call<CellDetails>, response: Response<CellDetails>) {
-                println(response.body())
 
                 val bedsCount = findViewById<TextView>(R.id.bedsCountCellDetails)
                 val cellNumber = findViewById<TextView>(R.id.numberCellDetails)
-                val id = findViewById<TextView>(R.id.idCellDetails)
                 val idCellType = findViewById<TextView>(R.id.cellTypeDetails)
                 val idPrison = findViewById<TextView>(R.id.idPrisonCellDetails)
                 val occupiedBeds = findViewById<TextView>(R.id.occupiedBedsCellDetails)
@@ -60,7 +63,6 @@ class CellDetailsActivity : AppCompatActivity() {
                 idPrison.text = response.body()?.idPrison.toString()
                 occupiedBeds.text = response.body()?.occupiedBeds.toString()
             }
-
             override fun onFailure(call: Call<CellDetails>, t: Throwable) {
                 Toast.makeText(this@CellDetailsActivity, "nie Dziala CellDetails", Toast.LENGTH_SHORT).show()
             }
@@ -68,11 +70,20 @@ class CellDetailsActivity : AppCompatActivity() {
         })
 
         edytujCele.setOnClickListener {
-            Toast.makeText(this, "EdytujCele", Toast.LENGTH_SHORT).show()
-        }
+            startActivity(
+                    Intent(this,EditCellActivity::class.java).putExtra("cell_id",id.text.toString())
+                )
+            }
 
         usunCele.setOnClickListener {
-            Toast.makeText(this, "usun Cele", Toast.LENGTH_SHORT).show()
+            retrofit.deleteCell("Bearer " + token,cell_id).enqueue(object : Callback<DeleteCellResponse> {
+                override fun onResponse(call: Call<DeleteCellResponse>, response: Response<DeleteCellResponse>) {
+                    startActivity(Intent(this@CellDetailsActivity, CellsActivity::class.java))
+                    overridePendingTransition(0, 0)
+                }
+                override fun onFailure(call: Call<DeleteCellResponse>, t: Throwable) {
+                }
+            })
         }
 
     }
@@ -87,6 +98,10 @@ class CellDetailsActivity : AppCompatActivity() {
 
         when(item.itemId)
         {
+            R.id.home -> {
+                startActivity(Intent(this, HomeAcitivity::class.java))
+                overridePendingTransition(0,0)
+            }
             R.id.logs -> {
                 startActivity(Intent(this, LogsActivity::class.java))
                 overridePendingTransition(0,0)

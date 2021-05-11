@@ -55,9 +55,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-        app:layout_constraintVertical_bias="0.151"
+        app:layout_constraintVertical_bias="0.159"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -68,9 +69,37 @@
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textRegister"
+        app:layout_constraintVertical_bias="0.416"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textAdminRegiseter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin?"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toEndOf="@+id/textRegister"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.647" />
+
+    <Button
+        android:id="@+id/butnAdminRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.681"
+        app:layout_constraintStart_toEndOf="@+id/butRegister"
+        app:layout_constraintTop_toBottomOf="@+id/textAdminRegiseter"
+        app:layout_constraintVertical_bias="0.148" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

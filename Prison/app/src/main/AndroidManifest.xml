@@ -13,14 +13,45 @@
         android:theme="@style/Theme.Prison"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.EditCellActivity"
+            android:label="Edit Cell"
+            android:theme="@style/Theme.Prison"/>
+        <activity
+            android:name=".Activity.EditPassActivity"
+            android:label="Edit Pass"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.AddPassActivity"
+            android:label="Add Pass"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.AddIsolactionActivity"
+            android:label="Add Isolaction"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.EditPunishmentActivity"
+            android:label="Edit Punishment"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.AddPunishmentActivity"
+            android:label="Add Punishment"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.EditPrisonerActivity"
+            android:label="Edit Prisoner"
+            android:theme="@style/Theme.Prison" />
+        <activity
+            android:name=".Activity.AdminRegisterActivity"
+            android:label="Admin Register"
+            android:theme="@style/Theme.Prison" />
+        <activity
             android:name=".Activity.AddCellActivity"
             android:label="Add Cells"
-            android:theme="@style/Theme.Prison">
-        </activity>
+            android:theme="@style/Theme.Prison" />
         <activity
             android:name=".Activity.AddPrisonerrActivity"
             android:label="Add Prisoner"
-            android:theme="@style/Theme.Prison"></activity>
+            android:theme="@style/Theme.Prison" />
         <activity
             android:name=".Activity.CellDetailsActivity"
             android:label="Cells"

@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.prison.R
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
+import models.DeletePrisonerResponse
 import models.PrisonerResponse
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -28,6 +29,7 @@ class PrisonerActivity : AppCompatActivity() {
         val prisoner_id = getIntent().getStringExtra("prisoner_id").toString().toInt()
         val pref = getApplicationContext().getSharedPreferences("my_shared_preff", 0);
         val token = pref.getString("tokken", "")
+//        println(getIntent().extras)
 
         val usunWieznia = findViewById<Button>(R.id.usunWieznia)
         val edytujWieznia = findViewById<Button>(R.id.edytujWieznia)
@@ -58,7 +60,6 @@ class PrisonerActivity : AppCompatActivity() {
 
         retrofit.getPrisoner("Bearer " + token,prisoner_id).enqueue(object : Callback<PrisonerResponse> {
             override fun onResponse(call: Call<PrisonerResponse>, response: Response<PrisonerResponse>) {
-                println(response.body())
 
                 val name = findViewById<TextView>(R.id.name)
                 val username = findViewById<TextView>(R.id.username)
@@ -80,43 +81,73 @@ class PrisonerActivity : AppCompatActivity() {
         })
 
         usunWieznia.setOnClickListener {
-            Toast.makeText(this, "usunWieznia", Toast.LENGTH_SHORT).show()
+            retrofit.deletePrisoner("Bearer " + token,prisoner_id).enqueue(object :
+                Callback<DeletePrisonerResponse> {
+                override fun onResponse(
+                    call: Call<DeletePrisonerResponse>,
+                    response: Response<DeletePrisonerResponse>
+                ) {
+                    startActivity(Intent(this@PrisonerActivity, HomeAcitivity::class.java))
+                    overridePendingTransition(0, 0)
+                }
+
+                override fun onFailure(call: Call<DeletePrisonerResponse>, t: Throwable) {
+                    Toast.makeText(this@PrisonerActivity, "Nie dziala Delete Prisoner", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
         }
 
         edytujWieznia.setOnClickListener {
-            Toast.makeText(this, "edytujWieznia", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, EditPrisonerActivity::class.java).putExtra("prisoner_id",prisoner_id))
+            overridePendingTransition(0,0)
         }
 
         dodajKare.setOnClickListener {
-            Toast.makeText(this, "dodajKare", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, AddPunishmentActivity::class.java).putExtra("id_prisoner",prisoner_id))
+            overridePendingTransition(0,0)
         }
 
         edytujKare.setOnClickListener {
-            Toast.makeText(this, "edytujKare", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, EditPunishmentActivity::class.java).putExtra("id_prisoner",prisoner_id))
+            overridePendingTransition(0,0)
         }
 
         usunKare.setOnClickListener {
-            Toast.makeText(this, "usunKare", Toast.LENGTH_SHORT).show()
+
         }
 
         dodajIzolatke.setOnClickListener {
-            Toast.makeText(this, "dodajIzolatke", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, AddIsolactionActivity::class.java).putExtra("id_prisoner",prisoner_id))
+            overridePendingTransition(0,0)
         }
 
         usunIzolatke.setOnClickListener {
-            Toast.makeText(this, "usunIzolatke", Toast.LENGTH_SHORT).show()
+            retrofit.deletePrisonerIsolation("Bearer " + token,prisoner_id).enqueue(object : Callback<DeletePrisonerResponse> {
+                override fun onResponse(call: Call<DeletePrisonerResponse>, response: Response<DeletePrisonerResponse>) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onFailure(call: Call<DeletePrisonerResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
         }
 
         dodajPrzepustke.setOnClickListener {
-            Toast.makeText(this, "dodajPrzepustke", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, AddPassActivity::class.java).putExtra("id_prisoner",prisoner_id))
+            overridePendingTransition(0,0)
         }
 
         edytujPrzepustke.setOnClickListener {
-            Toast.makeText(this, "edytujPrzepustke", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, EditPassActivity::class.java).putExtra("id_prisoner",prisoner_id))
+            overridePendingTransition(0,0)
         }
 
         usunPrzepustke.setOnClickListener {
-            Toast.makeText(this, "usunPrzepustke", Toast.LENGTH_SHORT).show()
+
         }
 
 
@@ -131,6 +162,10 @@ class PrisonerActivity : AppCompatActivity() {
 
         when(item.itemId)
         {
+            R.id.home -> {
+                startActivity(Intent(this, HomeAcitivity::class.java))
+                overridePendingTransition(0,0)
+            }
             R.id.logs -> {
                 startActivity(Intent(this, LogsActivity::class.java))
                 overridePendingTransition(0,0)

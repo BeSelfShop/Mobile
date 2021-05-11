@@ -47,7 +47,6 @@ class CellsActivity : AppCompatActivity(), CellsAdapter.OnItemClickListener {
         retrofit.getCells("Bearer " + token).enqueue(object :
             Callback<List<Cell>> {
             override fun onResponse(call: Call<List<Cell>>, response: Response<List<Cell>>) {
-                println(response.body())
                 response.body()?.let { initRecyclerView(it) }
             }
 

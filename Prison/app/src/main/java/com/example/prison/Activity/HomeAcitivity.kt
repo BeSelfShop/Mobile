@@ -51,7 +51,6 @@ class HomeAcitivity : AppCompatActivity(), PrisonerAdapter.OnItemClickListener {
 
         retrofit.getPrisoners("Bearer " + token).enqueue(object : Callback<List<PrisonersResponse>> {
             override fun onResponse(call: Call<List<PrisonersResponse>>, response: Response<List<PrisonersResponse>>) {
-                println(response.body())
                 response.body()?.let { initRecyclerView(it) }
             }
 

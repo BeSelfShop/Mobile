@@ -29,9 +29,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         val buttonLogin = findViewById<Button>(R.id.loginBtn)
         val buttonRegister = findViewById<Button>(R.id.butRegister)
+        val buttonRegisterAdmin = findViewById<Button>(R.id.butnAdminRegister)
 
         val pref = getApplicationContext().getSharedPreferences("my_shared_preff", 0)
-        println("1.LoginAcitivity")
         pref.edit().clear()
         println(pref.getString("token",""))
 
@@ -42,16 +42,12 @@ class LoginActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.passwordText).text.toString()
 
 
-            println(login + " " + password)
-
             RetrofitClient.buildApi(Api::class.java).userLogin(login,password).enqueue(object: Callback<LoginReq>{
                 override fun onFailure(call: Call<LoginReq>, t: Throwable) {
                     Toast.makeText(this@LoginActivity,"nie dziala LoginActivity",Toast.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(call: Call<LoginReq>, req: Response<LoginReq>) {
-
-                    println(req.body())
 
                     if(req.body() != null)
                     {
@@ -64,8 +60,14 @@ class LoginActivity : AppCompatActivity() {
             })
 
         }
+
         buttonRegister.setOnClickListener{
             val intent = Intent(applicationContext, RegisterAcitivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonRegisterAdmin.setOnClickListener{
+            val intent = Intent(applicationContext, AdminRegisterActivity::class.java)
             startActivity(intent)
         }
 
